@@ -59,15 +59,15 @@ body {
 }
 
 .clear-button {
-    grid-column: 1;
+    grid-column: 1 / 4;
     grid-row: 2;
     height: 100%;
     max-width: 100%;
 }
 
 .equal {
-    grid-column: 2 / 4;
-    grid-row: 2;
+    /* grid-column: 2 / 4;
+    grid-row: 2; */
     height: 100%;
     width: 100%;
     font-size: 20px;
@@ -116,6 +116,7 @@ body {
     background-color: rgb(244, 244, 244);
     border: 1px solid rgb(194, 194, 194);
     border-radius: 6px;
+    cursor: pointer;
 }
 
 #divide,
