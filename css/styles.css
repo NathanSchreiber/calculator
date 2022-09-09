@@ -1,0 +1,127 @@
+:root {
+    --calculator-color: white;
+}
+
+html {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: rgb(53, 52, 52);
+    color: black;
+    font-size: 16px;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 25rem;
+    border: 2px solid rgba(255, 255, 255, 0.931);
+    border-radius: 13px;
+    background-color: var(--calculator-color);
+}
+
+.calculator-contents {
+    display: grid;
+    margin: 1rem;
+    height: 90%;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-buttons,
+.clear-button,
+.function-buttons {
+    background-color: rgb(154, 152, 152);
+}
+
+.screen {
+    grid-column: 1 / 5;
+    justify-self: center;
+    font-size: 35px;
+    border: 2px solid rgb(90, 90, 90);
+    border-radius: 5px;
+    width: 100%;
+    height: 70%;
+    text-align: right;
+}
+
+.clear-button {
+    grid-column: 1;
+    grid-row: 2;
+    height: 100%;
+    max-width: 100%;
+}
+
+.equal {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.input-buttons {
+    background-color: var(--calculator-color);
+    height: 100%;
+    grid-column: 1 / 4;
+    grid-row: 3 / 7;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.function-buttons {
+    background-color: var(--calculator-color);
+    grid-column: 4;
+    grid-row: 2 / 7;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+}
+
+
+#one,
+#two,
+#three,
+#four,
+#five,
+#six,
+#seven,
+#eight,
+#nine,
+#zero,
+#decimal,
+.clear-button,
+#divide,
+#multiply,
+#add,
+#subtract,
+.equal {
+    background-color: rgb(244, 244, 244);
+    border: 1px solid rgb(194, 194, 194);
+    border-radius: 6px;
+}
+
+#divide,
+#multiply,
+#add,
+#subtract,
+#decimal {
+    font-size: 20px;
+}
