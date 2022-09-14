@@ -21,90 +21,122 @@ const nine = document.querySelector('#nine');
 const zero = document.querySelector('#zero');
 const decimal = document.querySelector('#decimal');
 
-// Function to clear screen and total. Resets decimal point button
-clearButton.addEventListener('click', () => {
-    total = 0;
-    screen.textContent = 0;
-    decimal.style.pointerEvents = "auto";
-    firstNumber = "";
-    secondNumber = "";
-});
-
-// Function to use specific operator depending on what's clicked
-// const operate = function(x, y) {
-//     add.addEventListener('click', () => {
-//         total = x + y;
-//     });
-//     subtract.addEventListener('click', () => {
-//         total = x - y;
-//     });
-//     multiply.addEventListener('click', () => {
-//         total = x * y;
-//     });
-//     divide.addEventListener('click', () => {
-//         total = x / y;
-//     });
-//     equal.addEventListener('click', () => {
-//         screen.textContent = `${total}`;
-//     });
-// };
-
 let newInput = 0;
-
+let total = 0;
+let firstNumber = "";
+let secondNumber = "";
+let nextNumber = "";
+let operator = "";
 // Makes numbers/decimal appear on screen as one "number" (string)
 for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('click', function(e) {
-      if (screen.textContent == 0) {
-        x = e.target.textContent;
-        if (x == ".") { // Disallows multiple decimal points
-            decimal.style.pointerEvents = "none";
-        };
-        newInput = x;
-      } else {
-        x = e.target.textContent;
-        currentInput = screen.textContent;
-        if (x == ".") { // Disallows multiple decimal points
-            decimal.style.pointerEvents = "none";
-        };
-        newInput = currentInput + x;
-      }
-      screen.textContent = `${newInput}`;
-    });
+        if (screen.textContent == 0) {
+            x = e.target.textContent;
+            if (x == ".") { // Disallows multiple decimal points
+                decimal.style.pointerEvents = "none";
+            };
+            newInput = x;
+        } else {
+            screen.textContent = newInput;
+            x = e.target.textContent;
+            currentInput = screen.textContent;
+            if (x == ".") { // Disallows multiple decimal points
+                decimal.style.pointerEvents = "none";
+            };
+            newInput = currentInput + x;
+        }
+        screen.textContent = `${newInput}`.substring(0, 16);
+        });
 };
 
 // Stores first input in variable after operator is pressed / stores operator
-let firstNumber = "";
-let secondNumber = "";
-let operator = "";
 operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
-        operator = e.target.textContent;
+        decimal.style.pointerEvents = "auto";
         if (firstNumber == "") {
             firstNumber = newInput;
-            screen.textContent = 0;
-            newInput = 0;
+            operator = e.target.textContent;
+            newInput = "";
+        } else if (firstNumber !== "" && operator !== "" ) {
+            secondNumber = newInput;
+            operate(firstNumber, secondNumber);
+            operator = e.target.textContent;
+            
+            newInput = ""
+        } else if (firstNumber !== "") {
+            secondNumber = newInput;
+            operate(firstNumber, secondNumber);
+            operator = e.target.textContent;
+            newInput = "";
         } else {
-            screen.textContent = 0; // Clears screen for each number after first 2
+            operator = e.target.textContent;
+            newInput = "";
         }
         
-        
+
+
+
+        // if (firstNumber == "" || firstNumber == 0) {
+        //     operator = e.target.textContent;
+        //     console.log(operator);
+        //     firstNumber = newInput;
+        //     screen.textContent = 0;
+        //     newInput = 0;
+        //     decimal.style.pointerEvents = "auto";
+        // } else if (firstNumber != "" || firstNumber != 0) {
+        //     secondNumber = newInput;
+        //     console.log(firstNumber);
+        //     secondNumber = newInput;
+        //     operate(firstNumber, secondNumber);
+        //     operator = e.target.textContent;
+        //     firstNumber = total;
+        //     secondNumber = "";
+        //     decimal.style.pointerEvents = "auto";
+        // } else {
+        //     screen.textContent = 0; // Clears screen for each number after first 2
+        //     secondOperator = e.target.textContent;
+        // };
+            
     });
 });
 
-//
-const operate = equal.addEventListener('click', (x, y) => {
+equal.addEventListener('click', (e) => {
     secondNumber = newInput;
+    operate(firstNumber, secondNumber);
+    decimal.style.pointerEvents = "auto";
+});
+
+// Functions to use specific operator depending on what's clicked first / second
+const operate = function(x, y) {
     x = Number(firstNumber);
     y = Number(secondNumber);
-    if (operator == "x") {
-        total = x * y;
+    if (x == 0 && y == 0 && operator == "/") {
+        screen.textContent = "Nice try!";
+    } else if (operator == "x") {
+        result = x * y;
     } else if (operator == "/") {
-        total = x / y;
+        result = x / y;
     } else if (operator == "+") {
-        total = x + y;
+        result = x + y;
     } else if (operator == "-") {
-        total = x - y;
+        result = x - y;
     };
-    screen.textContent = `${total}`;
+    total = Number(result.toFixed(2));
     firstNumber = total;
-});
+    secondNumber = "";
+    newInput = "";
+    screen.textContent = `${total}`;
+};
+
+// Function to clear screen and total. Resets decimal point button
+const clearFunction = () => {
+    total = 0;
+    screen.textContent = "";
+    decimal.style.pointerEvents = "auto";
+    firstNumber = "";
+    secondNumber = "";
+    newInput = "";
+    operator = "";
+};
+
+clearButton.addEventListener('click', () => clearFunction());
