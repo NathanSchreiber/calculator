@@ -1,5 +1,8 @@
 :root {
-    --calculator-color: white;
+    --calculator-color: rgb(220, 243, 252);
+    --button-color: skyblue;
+    --button-border: rgb(194, 194, 194);
+    --button-hover: rgb(166, 230, 255);
 }
 
 html {
@@ -41,10 +44,11 @@ body {
     align-items: center;
 }
 
-.input-buttons,
+.inputs,
 .clear-button,
 .function-buttons {
     background-color: rgb(154, 152, 152);
+    font-weight: bold;
 }
 
 .screen {
@@ -56,6 +60,7 @@ body {
     width: 100%;
     height: 70%;
     text-align: right;
+    background-color: rgb(212, 212, 212);
 }
 
 .clear-button {
@@ -66,8 +71,6 @@ body {
 }
 
 .equal {
-    /* grid-column: 2 / 4;
-    grid-row: 2; */
     height: 100%;
     width: 100%;
     font-size: 20px;
@@ -113,8 +116,9 @@ body {
 #add,
 #subtract,
 .equal {
-    background-color: rgb(244, 244, 244);
-    border: 1px solid rgb(194, 194, 194);
+    background-color: var(--button-color);
+    color: black;
+    border: 1px solid rgb(135, 207, 235);
     border-radius: 6px;
     cursor: pointer;
 }
@@ -125,4 +129,31 @@ body {
 #subtract,
 #decimal {
     font-size: 20px;
+}
+
+#one:hover,
+#two:hover,
+#three:hover,
+#four:hover,
+#five:hover,
+#six:hover,
+#seven:hover,
+#eight:hover,
+#nine:hover,
+#zero:hover,
+#decimal:hover,
+.clear-button:hover,
+#divide:hover,
+#multiply:hover,
+#add:hover,
+#subtract:hover,
+.equal:hover {
+    background-color: var(--button-hover);
+    transition: all .2s ease;
+}
+
+button:active {
+    background-color: var(--button-hover);
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
 }

@@ -58,6 +58,9 @@ operatorButtons.forEach((button) => {
             firstNumber = newInput;
             operator = e.target.textContent;
             newInput = "";
+        } else if(secondNumber == "" && total != 0 && newInput == "") {
+            // Allows for multiple operator pushes while staying functional
+            operator = e.target.textContent; 
         } else if (firstNumber !== "" && operator !== "" ) {
             secondNumber = newInput;
             operate(firstNumber, secondNumber);
@@ -76,6 +79,7 @@ operatorButtons.forEach((button) => {
     });
 });
 
+// Calls operate when equals button is pushed
 equal.addEventListener('click', (e) => {
     secondNumber = newInput;
     operate(firstNumber, secondNumber);
@@ -102,7 +106,7 @@ const operate = function(x, y) {
     firstNumber = total;
     secondNumber = "";
     newInput = "";
-    screen.textContent = `${total}`;
+    screen.textContent = `${total.toLocaleString("en-US")}`;
 };
 
 // Function to clear screen and total. Resets decimal point button
