@@ -50,6 +50,7 @@ for (let i = 0; i < inputs.length; i++) {
 };
 
 // Stores first input in variable after operator is pressed / stores operator
+// while also enabling use of multiple operators
 operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         decimal.style.pointerEvents = "auto";
@@ -71,32 +72,7 @@ operatorButtons.forEach((button) => {
         } else {
             operator = e.target.textContent;
             newInput = "";
-        }
-        
-
-
-
-        // if (firstNumber == "" || firstNumber == 0) {
-        //     operator = e.target.textContent;
-        //     console.log(operator);
-        //     firstNumber = newInput;
-        //     screen.textContent = 0;
-        //     newInput = 0;
-        //     decimal.style.pointerEvents = "auto";
-        // } else if (firstNumber != "" || firstNumber != 0) {
-        //     secondNumber = newInput;
-        //     console.log(firstNumber);
-        //     secondNumber = newInput;
-        //     operate(firstNumber, secondNumber);
-        //     operator = e.target.textContent;
-        //     firstNumber = total;
-        //     secondNumber = "";
-        //     decimal.style.pointerEvents = "auto";
-        // } else {
-        //     screen.textContent = 0; // Clears screen for each number after first 2
-        //     secondOperator = e.target.textContent;
-        // };
-            
+        };   
     });
 });
 
@@ -104,6 +80,7 @@ equal.addEventListener('click', (e) => {
     secondNumber = newInput;
     operate(firstNumber, secondNumber);
     decimal.style.pointerEvents = "auto";
+    operator = "";
 });
 
 // Functions to use specific operator depending on what's clicked first / second
