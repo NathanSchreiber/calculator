@@ -27,6 +27,7 @@ let firstNumber = "";
 let secondNumber = "";
 let nextNumber = "";
 let operator = "";
+let result = 0;
 // Makes numbers/decimal appear on screen as one "number" (string)
 for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('click', function(e) {
@@ -65,7 +66,6 @@ operatorButtons.forEach((button) => {
             secondNumber = newInput;
             operate(firstNumber, secondNumber);
             operator = e.target.textContent;
-            
             newInput = ""
         } else if (firstNumber !== "") {
             secondNumber = newInput;
@@ -77,6 +77,72 @@ operatorButtons.forEach((button) => {
             newInput = "";
         };   
     });
+});
+
+// Makes keys register as calculator buttons
+document.addEventListener("keypress", (e) => {
+    // Takes number keys and puts into calculator
+    if (e.key == "1" ||
+    e.key == "2" ||
+    e.key == "3" ||
+    e.key == "4" ||
+    e.key == "5" ||
+    e.key == "6" ||
+    e.key == "7" ||
+    e.key == "8" ||
+    e.key == "9" ||
+    e.key == "0" ||
+    e.key == ".") {
+        if (screen.textContent == 0) {
+            x = e.key;
+            if (x == ".") { // Disallows multiple decimal points
+                decimal.style.pointerEvents = "none";
+            };
+            newInput = x;
+        } else {
+            screen.textContent = newInput;
+            x = e.key;
+            currentInput = screen.textContent;
+            if (x == ".") { // Disallows multiple decimal points
+                decimal.style.pointerEvents = "none";
+            };
+            newInput = currentInput + x;
+        }
+        screen.textContent = `${newInput}`.substring(0, 16);
+    };
+    if (e.key == "+" ||
+    e.key == "-" ||
+    e.key == "x" ||
+    e.key == "/") {
+        if (firstNumber == "") {
+            firstNumber = newInput;
+            operator = e.key;
+            newInput = "";
+        } else if(secondNumber == "" && total != 0 && newInput == "") {
+            // Allows for multiple operator pushes while staying functional
+            operator = e.key; 
+        } else if (firstNumber !== "" && operator !== "" ) {
+            secondNumber = newInput;
+            operate(firstNumber, secondNumber);
+            operator = e.key;
+            newInput = ""
+        } else if (firstNumber !== "") {
+            secondNumber = newInput;
+            operate(firstNumber, secondNumber);
+            operator = e.key;
+            newInput = "";
+        } else {
+            operator = e.key;
+            newInput = "";
+        };
+    };
+    if (e.key == "=") {
+        secondNumber = newInput;
+        operate(firstNumber, secondNumber);
+        decimal.style.pointerEvents = "auto";
+        operator = "";
+    };
+    if (e.key == "c") {clearFunction()};
 });
 
 // Calls operate when equals button is pushed
