@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
 :root {
     --calculator-color: rgb(220, 243, 252);
     --button-color: skyblue;
@@ -54,13 +56,15 @@ body {
 .screen {
     grid-column: 1 / 5;
     justify-self: center;
-    font-size: 35px;
+    font-size: 30px;
     border: 2px solid rgb(90, 90, 90);
     border-radius: 5px;
     width: 100%;
     height: 70%;
     text-align: right;
     background-color: rgb(212, 212, 212);
+    font-family: 'Secular One', sans-serif;
+    line-height: 140%;
 }
 
 .clear-button {
